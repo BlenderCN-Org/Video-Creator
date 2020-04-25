@@ -1,7 +1,7 @@
 import bpy
 from os import path
 from . script_generate_video import generate_video
-
+from time import time #Тест времени
 
 class Scene_Properties(bpy.types.PropertyGroup):
     # Кастомные свойства для хранения данных
@@ -92,7 +92,10 @@ class Video_Generation_Operator(bpy.types.Operator):
         # ---ГЕНЕРАЦИЯ ВИДЕО НА ОСНОВЕ ВХОДНЫХ ДАННЫХ---
         if not old_input_filepath.endswith('.json'):
             return {'FINISHED'}
+
+        start_time = time() #Старт
         frame_end = generate_video(old_input_filepath)
+        print('Time = ', time()-start_time) #Финиш
 
         # ---НАСТРОЙКИ ПО УМОЛЧАНИЮ---
         # Кастомные настройки + выходной путь
